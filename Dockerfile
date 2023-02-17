@@ -2,6 +2,7 @@ FROM node:slim AS app
 
 # We don't want the standalone Chromium
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 # To be able to use env variables in a build process we need to set this madness
 ARG KINDLE_IP
 ENV KINDLE_IP $KINDLE_IP
@@ -26,7 +27,8 @@ RUN apt-get update && apt-get install curl gnupg imagemagick openssh-client sshp
   && curl --location --silent https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
   && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list' \
   && apt-get update \
-  && apt-get install google-chrome-stable -y --no-install-recommends \
+#  && apt-get install google-chrome-stable -y --no-install-recommends \
+  && apt-get install chromium \
   && apt-get install imagemagick \
   && rm -rf /var/lib/apt/lists/*
 
