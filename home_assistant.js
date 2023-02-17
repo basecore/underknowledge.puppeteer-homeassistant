@@ -13,7 +13,6 @@ function sleep(ms) {
 
 (async () => {
   const browser = await puppeteer.launch({
-  executablePath: '/usr/bin/chromium-browser',
   headless: true,
   args: ['--no-sandbox', "--disabled-setupid-sandbox"], 
     // defaultViewport:{width:1366,height:768},
